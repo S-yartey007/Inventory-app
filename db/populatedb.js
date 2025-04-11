@@ -41,12 +41,14 @@ async function main() {
   console.log("seeding...");
   const client = new Client({
     connectionString:
-      "postgresql://emmanuel:phantompain@localhost:5432/gamedata",
+      "postgresql://message_db_kcrz_user:7IiyS6BI4CjRqJ8zTPMP0AI4S7707Dhs@cvr7ehmuk2gs73cb6b6g-a.oregon-postgres.render.com:5432/message_db_kcrz",
+    ssl: {
+      rejectUnauthorized: false,
+    },
   });
   await client.connect();
   await client.query(SQL);
   await client.end();
   console.log("done");
 }
-
 main();

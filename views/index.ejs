@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title %></title>
+  </head>
+  <body>
+    <%-include("./partials/header.ejs",{title: "Game Inventory"}) %>
+    <main>
+      <h2>This is your awesome inventory</h2>
+      <section>
+        <h2>
+          <a href="/genres/create">
+            <button><b>create genre</b></button>
+          </a>
+        </h2>
+
+        <a href="/games/create">
+          <button><b>Add game</b></button>
+        </a>
+      </section>
+    </main>
+
+    <%-include("./partials/footer.ejs") %>
+  </body>
+</html>

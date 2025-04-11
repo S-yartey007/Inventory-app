@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%-include("./partials/header.ejs",{title: "Genre" }) %>
+    <main>
+      <button class="delete_btn">Delete genre</button>
+      <section>
+        <% if(games.length > 0) { %> <% games.map(game => { %>
+        <article>
+          <h2>Title: <%= game.title %></h2>
+          <li>Release date: <%= game.release_date %></li>
+          <li>Description: <%= game.description %></li>
+        </article>
+
+        <% }) %> <% } else { %>
+        <h2>Create a genre</h2>
+        <% } %>
+      </section>
+    </main>
+
+    <%-include("./partials/footer.ejs") %>
+
+    <script>
+      const path = window.location.pathname;
+      const delete_btn = document.querySelector(".delete_btn");
+
+      // Split it
+      const parts = path.split("/");
+      const genreId = parts[2];
+      function deleteGenre(Id) {
+        console.log(genreId);
+        fetch(`/genres/${Id}`, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to delete genre");
+            }
+            return response.json(); // or response.json() if your server returns JSON
+          })
+          .then((response) => {
+            console.log("Genre deleted:", response);
+            window.location = response.redirect;
+          })
+          .then((data) => console.log(data))
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      delete_btn.addEventListener("click", () => {
+        deleteGenre(genreId);
+      });
+    </script>
+  </body>
+</html>

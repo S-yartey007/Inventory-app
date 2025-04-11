@@ -1,0 +1,7 @@
+<article>
+  <% if(usernames.length > 0) { %> <% usernames.map(username => { %>
+  <li><%= username.username %></li>
+  <% }) %> <% } else { %>
+  <h2>Create a user</h2>
+  <% } %>
+</article>

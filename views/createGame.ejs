@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%-include("./partials/header.ejs",{title : "Create new Genre"}) %>
+    <main>
+      <section>
+        <form action="/games/create" method="post">
+          <label for="title">Game Title:</label>
+          <input type="text" id="title" name="title" required /><br /><br />
+
+          <label for="release_date">Release Year:</label>
+          <input
+            type="date"
+            id="release_date"
+            name="release_date"
+            required
+          /><br />
+          <label for="description">Description: </label>
+          <br />
+          <textarea name="description" id="description"></textarea>
+          <label for="genres">Genres:</label><br />
+          <% genres.forEach(genre => { %>
+          <input type="checkbox" name="genres" value="<%= genre.id %>" /> <%=
+          genre.name %><br />
+          <% }) %><br />
+
+          <label for="developers">Developers:</label><br />
+          <% developers.forEach(dev => { %>
+          <input type="checkbox" name="developers" value="<%= dev.id %>" /> <%=
+          dev.name %><br />
+          <% }) %><br />
+
+          <button type="submit">Add Game</button>
+        </form>
+      </section>
+    </main>
+    <%-include("./partials/footer.ejs") %>
+  </body>
+</html>
